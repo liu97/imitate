@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>验证用户是否输入</title>
+	<link rel="stylesheet" type="text/css" href="css/1_2.css">
+</head>
+<body>
+	<div id="main">
+		<form action="javascript:void(0);" method="post">
+			<div id="row1" class="row">
+				<label for="input1">用户名</label>
+				<input type="text" name="input1" id="input1" placeholder="&nbsp;&nbsp;用户名">
+				<div class="hint" id="hint1">
+					<div class="tri"></div>
+					<div class="tri2">不能为空</div>
+				</div>
+			</div>
+			<div id="row2" class="row">
+				<label for="input2">密码</label>
+				<input type="password" name="input2" id="input2" placeholder="&nbsp;&nbsp;密码">
+				<div class="hint" id="hint2">
+					<div class="tri"></div>
+					<div class="tri2">不能为空</div>
+				</div>
+			</div>
+			<div id="row3" class="row">
+				<label for="text1">备注</label>
+				<textarea id=text1 placeholder=" 备注"></textarea>
+			</div>
+			<div id="row4">
+				<input type="checkbox" id="check1" name="check1">
+				<label for="check1">记住我</label>
+			</div>
+			<div id="row5" class="row">
+				<input type="button" name="btn" id="btn" value="提交">
+			</div>
+		</form>
+	</div>
+</body>
+<script type="text/javascript">
+window.onload=function(){
+	var btn=document.getElementById("btn");
+	var input1=document.getElementById("input1");
+	var input2=document.getElementById("input2");
+	var hint2=document.getElementById("hint2");
+	var hint1=document.getElementById("hint1");
+	btn.onclick=function(){
+		if(input1.value==""){
+			hint1.style.display="block";
+		}
+		if(input2.value==""){
+			hint2.style.display="block";
+		}
+	}
+	input1.onclick=function(){
+		hint1.style.display="none";
+	};
+	input2.onclick=function(){
+		hint2.style.display="none";
+	};
+}
+
+</script>
+</html>
