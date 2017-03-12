@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>禁止用户复制粘贴</title>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<style type="text/css">
+		.container{
+			margin-top: 100px;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-11 col-sm-10 col-md-6  col-sm-offset-1 col-md-offset-3">
+				<form class="form-horizontal" role="form">
+				  <div class="form-group">
+				    <label for="input1" class="col-sm-3 control-label">用户名</label>
+				    <div class="col-sm-9">
+				      <input type="email" class="form-control" id="input1" placeholder="用户名">
+				    </div>
+				  </div>
+				  <div class="form-group">
+				    <label for="input2" class="col-sm-3 control-label">密码</label>
+				    <div class="col-sm-9">
+				      <input type="password" class="form-control" id="input2" placeholder="密码">
+				    </div>
+				  </div>
+				  <div class="form-group">
+				    <div class="col-sm-offset-3 col-sm-9">
+				      <button type="submit" class="btn btn-primary btn-block">提交</button>
+				    </div>
+				  </div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		window.onload=function(){
+			var ipt= document.getElementsByTagName("input");
+			for (var i = 0; i < ipt.length; i++) {
+				ipt[i].oncopy=ipt[i].onpaste=ipt[i].oncut=function(){
+					return false;
+				};
+			}
+		}//oncopy  复制权限; onpaste  粘贴权限;  oncut 剪切权限;
+	</script>
+	<script type="text/javascript" src="js/jquery-3.0.0.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+</body>
+</html>
