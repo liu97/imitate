@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>段落文本字体自动滚动</title>
+	<link rel="stylesheet" type="text/css" href="css/reset.css">
+	<style type="text/css">
+		#main{
+			margin-left: 40%;
+			margin-top: 100px;
+		}
+		#p1{
+			color: black;
+			font-size: 25px;
+			/*font-weight: bold;*/
+			padding-bottom: 10px;
+		}
+		#nei{
+			height: 160px;
+			overflow: hidden;
+		}
+		#ul1{
+			margin-top: 0;	
+
+		}
+		.li1{
+			font-size: 14px;
+			height: 20px;
+		}
+	</style>
+</head>
+<body>
+	<div id="main">
+		<p id="p1">文本框中的文字自动滚动</p>
+		<div id="nei">
+			<ul id="ul1">
+			<li class="li1">春江潮水连海平，海上明月共潮生。</li>
+			<li class="li1">滟滟随波千万里，何处春江无月明! </li>
+			<li class="li1">江流宛转绕芳甸，月照花林皆似霰; </li>
+			<li class="li1">空里流霜不觉飞，汀上白沙看不见。</li>
+			<li class="li1">江天一色无纤尘，皎皎空中孤月轮。</li>
+			<li class="li1">江畔何人初见月？江月何年初照人？</li>
+			<li class="li1">人生代代无穷已，江月年年望相似。</li>
+			<li class="li1">不知江月待何人，但见长江送流水。</li>
+			<li class="li1">白云一片去悠悠，青枫浦上不胜愁。</li>
+		</ul>
+		</div>
+	</div>
+	<script type="text/javascript">
+		var oul=document.getElementById("ul1");
+		var oli=document.getElementsByClassName("li1")[0];
+		var speed=null;
+
+		window.onload=function(){
+			setInterval(function(){
+				oul.appendChild(oul.children[0]);
+				startMove(oul,"marginTop",-20);
+				
+				oul.style.marginTop=0;
+			},1000)
+		}
+
+		function startMove(obj,name,value){
+			clearInterval(obj.timer);
+			obj.timer=setInterval(function(){
+				var cul=(value-parseInt(getStyle(obj,name)))/10;
+				if(cul>0){
+					speed=Math.ceil(cul);
+				}
+				else{
+					speed=Math.floor(cul)
+				}
+				if(value==parseInt(obj.style.name)){
+					 clearInterval(obj.timer);
+				}
+				else{
+					obj.style[name]=parseInt(getStyle(obj,name))+speed+"px";
+					console.log(obj.style[name]);
+				}
+			},30)
+		}
+		function getStyle(obj,name){
+			if(obj.currentStyle){
+				return obj.currentStyle[name];
+			}
+			else{
+				return getComputedStyle(obj,false)[name];
+			}
+		}
+	</script>
+</body>
+</html>
