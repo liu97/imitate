@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>动态操作下拉选项</title>
+	<style type="text/css">
+		#container{
+			margin:200px 0 0 45%;
+			width: 250px;
+		}
+		input{
+			margin-bottom: 20px;
+		}
+	</style>
+</head>
+<body>
+	<div id="container">
+		<input type="text"  id="txt">
+		<input type="button" value="添加" id="add">
+		<select name="" id="sel">
+			<option value="1">中国人</option>
+			<option value="2">蒙古人</option>
+			<option value="3">朝鲜人</option>
+		</select>
+		<input type="button" name="" value="删除" id="del">
+	</div>
+	<script type="text/javascript">
+		var add=document.getElementById("add");
+		var del=document.getElementById("del");
+		var txt=document.getElementById("txt");
+		var sel=document.getElementById("sel");
+		var i=3;
+
+		add.onclick=function(){
+			if(txt.value==""){
+				alert("选项不能为空哦");
+			}
+			else{
+				var newop=document.createElement("option");
+				newop.value=++i;
+				newop.innerHTML=txt.value;
+				sel.appendChild(newop);
+			}
+		}
+		del.onclick =function(){
+			var x;
+			if(sel.children.length==1){
+				alert("这是最后一个选项啦");
+			}
+			else{
+				for (var i = 0; i < sel.children.length; i++) {
+					if(sel.children[i].selected==true){x=i;}
+				}
+				sel.removeChild(sel.children[x]);
+			}
+		}
+	</script>
+</body>
+</html>
