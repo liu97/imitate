@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>全选反选复选框</title>
+	<style type="text/css">
+		#main{
+			width: 100px;
+			margin-left: 45%;
+			margin-top: 100px;
+			font-weight: bold;
+			font-size: 14px;
+		}
+		#all{
+			margin-bottom: 10px;
+		}
+		label{
+			cursor:pointer;
+		}
+		input{
+			width: 15px;
+			margin-top: 15px;
+		}
+	</style>
+</head>
+<body>
+	<div id="main">
+		<form>
+			<div id="mainall">
+				<input type="checkbox" name="" id="all">
+			    <label for="all">全选选项</label>
+			</div>
+			<input type="checkbox" id="c1" class="select">
+			<label for="c1">选项(一)</label>
+			<input type="checkbox" id="c2" class="select">
+			<label for="c2">选项(二)</label>
+			<input type="checkbox" id="c3" class="select">
+			<label for="c3">选项(三)</label>
+			<input type="checkbox" id="c4" class="select">
+			<label for="c4">选项(四)</label>
+			<input type="checkbox" id="c5" class="select">
+			<label for="c5">选项(五)</label>
+			<input type="checkbox" id="c6" class="select">
+			<label for="c6">选项(六)</label>
+			<input type="checkbox" id="c7" class="select">
+			<label for="c7">选项(七)</label>
+			<input type="checkbox" id="c8" class="select">
+			<label for="c8">选项(八)</label>
+			<input type="checkbox" id="c9" class="select">
+			<label for="c9">选项(九)</label>
+			<input type="checkbox" id="c10" class="select">
+			<label for="c10">选项(十)</label>
+		</form>
+	</div>
+	<script type="text/javascript">
+		window.onload=function(){
+			var all=document.getElementById("all");
+			var checks=getClass("select");
+			// console.log(checks);
+			all.onclick=function(){
+				if(all.checked==true){
+					for (var i = 0; i < checks.length; i++) {
+						checks[i].checked=true;
+					}
+				}
+				else{
+					for (var i = 0; i < checks.length; i++) {
+						checks[i].checked=false;
+					}
+				}
+			}
+		}
+		function getClass(name){
+			var arr=[];
+			var x=document.getElementsByTagName("*");
+			for (var i = 0; i < x.length; i++) {
+				if(x[i].className==name){
+					arr.push(x[i]);
+				}
+			}
+			return arr;
+		}
+	</script>
+</body>
+</html>
