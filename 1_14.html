@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>级联菜单</title>
+	<link rel="stylesheet" type="text/css" href="css/reset.css">
+	<style type="text/css">
+		#container{
+			width: 225px;
+			margin:200px 40%;
+		}
+		select{
+			width: 100px;
+			margin-left: 10px;
+		}
+	</style>
+</head>
+<body>
+	<div id="container">
+		<select id="select1">
+
+		</select>
+		<select id="select2">
+			
+		</select>
+	</div>
+	<script type="text/javascript">
+		var json={"北京市":["北京","东城区","西城区","海定区","朝阳区","宗文区","石景山区"],"天津市":["和平区","河东区","河西区","南开区","红桥区","大港区","宁河县"],"江西省":["南昌市","九江市","景德镇市","鹰潭市","新余市","萍乡市"]};
+		var sel1=document.getElementById("select1");
+		var sel2=document.getElementById("select2");
+		var x=1,y=-1;
+
+		window.onload=function(){
+			re();
+			re2();
+			sel1.onchange=function(){
+				re2();
+			}
+			}
+		function re(){
+			for(var le in json){
+				// console.log(le+"="+json[le]);
+				var opt=document.createElement("option");
+				opt.value=x++;
+				opt.innerHTML=le;
+				sel1.appendChild(opt);
+		 	}
+		}
+		function re2(){
+			var select=getSelect();
+			del();
+			for (var i = 0; i < json[select].length; i++) {
+				var opt=document.createElement("option");
+				opt.value=y--;
+				opt.innerHTML=json[select][i];
+				sel2.appendChild(opt);
+			}
+		}
+		function del(){
+			for (var i = sel2.length-1; i >=0; i--) {
+				sel2.removeChild(sel2.children[i]);
+
+			}
+		}
+		function getSelect(){
+			for (var i = 0; i < sel1.length; i++) {
+				if(sel1[i].selected==true){
+					return sel1[i].innerHTML;
+				}
+			}
+		}
+	</script>
+</body>
+</html>
+<!-- 
+	json数组格式：json{"数组一":["1","2","3"],"数组二":["1","2","3"]}
+	json遍历方法 for(var le in json){
+					for(var i in json[le]){
+						console.log(json[le][i]);
+					}
+				 }
+
+
+	下拉框改变监听函数为onchange;
+
+ -->
