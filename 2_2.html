@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>图片放大效果</title>
+	<link rel="stylesheet" type="text/css" href="css/reset.css">
+	<style type="text/css">
+		body{
+			min-width: 1260px;
+		}
+		#container{
+			width: 100%;
+		}
+		#div1{
+			width:350px;
+			height: 350px;
+			border: 1px solid #ccc;
+			position: relative;
+			margin-left: 40%;
+			top: 50px;
+			left: -175px;
+			cursor: pointer;
+		}
+		#div2{
+			width: 250px;
+			height: 250px;
+			position: relative;
+			top: -300px;
+			left: 55%;
+			overflow: hidden;
+		}
+		#cover{
+			width: 100px;
+			height: 100px;
+			position: absolute;
+			background: black;
+			opacity: 0.1;
+			filter: opacity(10);
+			display: none;
+		}
+		#big{
+			position: absolute;
+			display: none;
+		}
+	</style>
+</head>
+<body>
+	<div id="container">
+		<div id="div1"><img src="images/small.jpg" alt="小图片" id="small"><div id="cover"></div></div>
+		<div id="div2"><img src="images/big.jpg" alt="大图片" id="big"></div>
+	</div>
+	<script type="text/javascript">
+		var div1=document.getElementById("div1");
+		var div2=document.getElementById("div2");
+		var small=document.getElementById("small");
+		var big=document.getElementById("big");
+		var cover=document.getElementById("cover");
+		var otop=div1.offsetTop;
+		var oleft=div1.offsetLeft;
+
+		window.onload=function(){
+			div1.onmouseover=function(){
+				document.onmousemove = mouseMove;
+				cover.style.display="block";
+				big.style.display="block";
+			}
+			div1.onmouseout=function(){
+				cover.style.display="none";
+				big.style.display="none";
+			}
+
+		}
+		function mousePosition(ev){
+		   if(ev.pageX || ev.pageY){
+		     return {x:ev.pageX, y:ev.pageY};
+		   }
+		   return {
+		     x:ev.clientX + document.body.scrollLeft - document.body.clientLeft,
+		     y:ev.clientY + document.body.scrollTop - document.body.clientTop
+		   };
+		}
+		function mouseMove(ev){
+		  	ev = ev || window.event;
+		 	var mousePos = mousePosition(ev);
+		 	var x=mousePos.x-oleft;
+			var y=mousePos.y-otop;
+		 	if(x<=50){
+		 		cover.style.left=0;
+		 		big.style.left=0;
+		 	}
+		 	else if(x>50&&x<300){
+		 		cover.style.left=(x-50)+"px";
+		 		big.style.left=Math.round(-(x-50)*11/5)+"px";
+		 	}
+		 	else{
+		 		cover.style.left="250px";
+		 		big.style.left="-550px";
+		 	}
+		 	if(y<=50){
+		 		cover.style.top=0;
+		 		big.style.top=0;
+		 	}
+		 	else if(y>50&&y<300){
+		 		cover.style.top=(y-50)+"px";
+		 		big.style.top=Math.round(-(y-50)*11/5)+"px";
+		 	}
+		 	else{
+		 		cover.style.top="250px";
+		 		big.style.top="-550px";
+		 	}
+		}
+	</script>
+</body>
+</html>
+<!--获取鼠标位置
+function mousePosition(ev){
+   if(ev.pageX || ev.pageY){
+     return {x:ev.pageX, y:ev.pageY};
+   }
+   return {
+     x:ev.clientX + document.body.scrollLeft - document.body.clientLeft,
+     y:ev.clientY + document.body.scrollTop - document.body.clientTop
+   };
+}
+ev = ev || window.event;
+var mousePos = mousePosition(ev);
+ -->
