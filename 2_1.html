@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>鼠标移入移出改变透明度</title>
+	<link rel="stylesheet" type="text/css" href="css/reset.css">
+	<style type="text/css">
+		#container{
+			width: 350px;
+			height: 350px;
+			margin:150px auto;
+		}
+		#img1{
+			opacity: 1;
+			filter:alpha(opacity: 100);
+		}
+	</style>
+</head>
+<body>
+	<div id="container">
+		<img src="images/1.jpg" alt="图片" id="img1">
+	</div>
+</body>
+<script type="text/javascript">
+	var img1=document.getElementById("img1");
+
+	window.onload=function(){
+		img1.onmouseover=function(){
+			startMove(img1,"opacity",30);
+		}
+		img1.onmouseout=function(){
+			startMove(img1,"opacity",100);
+		}
+	}
+	function startMove(obj,name,value){
+		// console.log(obj+" "+name+" "+value)
+		clearInterval(obj.timer);
+			obj.timer=setInterval(function(){
+			var cul=Math.round(parseFloat(getStyle(obj, name))*100);
+			var speed=value-cul>0?Math.ceil((value-cul)/10):Math.floor((value-cul)/10);
+			if(cul==value){
+				clearInterval(obj.timer);
+			}
+			else{
+				obj.style.filter='alpha(opacity:'+(cul+speed)+')';
+				obj.style.opacity=(cul+speed)/100;
+				
+			}
+		},30)
+	}
+	function getStyle(obj, name)
+	{
+		if(obj.currentStyle)
+		{
+			return obj.currentStyle[name];
+		}
+		else
+		{
+			return getComputedStyle(obj, false)[name];
+		}
+	}
+</script>
+</html>
