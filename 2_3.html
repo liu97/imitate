@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>点击图片逐渐放大</title>
+	<link rel="stylesheet" type="text/css" href="css/reset.css">
+	<style type="text/css">
+		body{
+			min-width: 1260px;
+		}
+		#container{
+			width: 100%;
+		}
+		#div1{
+			width:350px;
+			height: 350px;
+			border: 1px solid #ccc;
+			position: relative;
+			margin-left: 50%;
+			top: 100px;
+			left: -175px;
+			cursor: pointer;
+		}
+		#small{
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+		#cover{
+			width: 350px;
+			height: 350px;
+			position: absolute;
+			top:0;
+			left: 0;
+			background: white;
+			opacity: 0.3;
+			filter: opacity(30);
+			border:1px dashed red;
+		}
+	</style>
+</head>
+<body>
+	<div id="container">
+		<div id="div1"><img src="images/small.jpg" alt="小图片" id="small"><div id="cover"></div></div>
+	</div>
+	<script type="text/javascript">
+		var div1=document.getElementById("div1");
+		var small=document.getElementById("small");
+		var otop=div1.offsetTop;
+		var oleft=div1.offsetLeft;
+
+		window.onload=function(){
+			div1.onclick=function(){
+				startMove(small,{"top":-80,"left":-80,"width":500,"height":500})
+			}
+			
+
+		}
+		function startMove(obj,json){
+			clearInterval(obj.timer);
+			var cul=null,speed=null;
+			// console.log(obj+json);
+			obj.timer=setInterval(function(){
+				var stop=true;
+				for(attr in json){
+					cul=json[attr]-parseInt(getStyle(obj,attr));
+
+					speed=cul>0?Math.ceil(cul/10):Math.floor(cul/10);
+					if(parseInt(getStyle(obj,attr))!=json[attr]){
+						stop=false;
+						obj.style[attr]=(parseInt(getStyle(obj,attr))+speed)+"px";
+					}
+				}
+				if(stop){
+					clearInterval(obj.timer);
+				}
+			},30)
+		}
+		function getStyle(obj,name){
+			if(obj.currentStyle){
+				return obj.currentStyle[name];
+			}
+			else{
+				return getComputedStyle(obj,false)[name];
+			}
+		}
+	</script>
+</body>
+</html>
