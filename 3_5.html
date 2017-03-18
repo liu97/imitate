@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>可拖动的弹出层</title>
+	<link rel="stylesheet" type="text/css" href="css/reset.css">
+	<style type="text/css">
+		html,body{
+			width: 100%;
+			height: 100%;
+			min-width: 1000px;
+		}
+		#container{
+			width: 470px;
+			height: 100%;
+			position: relative;
+			margin-left: 50%;
+			margin-top:100px;
+			left: -235px;
+			top: 0;
+		}
+		button{
+			width: 200px;
+			height: 30px;
+			margin:10px 20px 0 0;
+		}
+		#coverdiv{
+			width: 100%;
+			height: 100%;
+			background: black;
+			opacity: 0.6;
+			filter: opacity(60);
+			position: absolute;
+			top: 0;
+			left: 0;
+			display: none;
+		}
+		#cover{
+			position: absolute;
+			top: 200px;
+			left: 30%;
+			width: 501px;
+			height: 161px;
+			border-radius: 10px;
+			background: white;
+			display: none;
+		}
+		#h1{
+			width: 100%;
+			height: 50px;
+			text-align: center;
+			line-height: 50px;
+			font-size: 18px;
+		}
+		#p1{
+			width: 100%;
+			height: 70px;
+			text-align: center;
+			line-height: 25px;
+			font-size: 14px;
+			color: #888;
+			border-bottom: 1px solid #ccc;
+		}
+		#coverbtn{
+			width: 100%;
+			height: 40px;
+		}
+		#coverbtn a{
+			display: block;
+			width: 250px;
+			height: 100%;
+			text-align: center;
+			line-height: 40px;
+			float: left;
+			font-size: 16px;
+		}
+		#a1{
+			border-right: 1px solid #ccc;
+		}
+	</style>
+</head>
+<body>
+	<div id="container">
+		<button class="btn" id="btn1">默认值</button>
+		<button class="btn" id="btn2">弹出confirm</button>
+		<button class="btn" id="btn3">弹出alert</button>
+		<button class="btn" id="btn4">延时关闭message</button>
+	</div>
+	<div id="coverdiv"></div>
+	<div id="cover">
+		<h1 id="h1">弹出层</h1>
+		<p id="p1">自定义弹出框内容，居左左对齐显示，告知需要确认的信息等<br>自定义弹出框内容，居左左对齐显示，告知需要确认的信息等</p>
+		<div id="coverbtn">
+			<a href="javascript:void(0)" id="a1">确定</a>
+			<a href="javascript:void(0)" id="a2">取消</a>
+		</div>
+	</div>
+	<script type="text/javascript">
+		var btn1=document.getElementById("btn1");
+		var btn2=document.getElementById("btn2");
+		var btn3=document.getElementById("btn3");
+		var btn4=document.getElementById("btn4");
+		var cover=document.getElementById("cover");
+		var coverdiv=document.getElementById("coverdiv");
+		var a1=document.getElementById("a1");
+		var a2=document.getElementById("a2");
+
+		window.onload=function(){
+			btn1.onclick=btn2.onclick=divblock;
+			btn3.onclick=function(){
+				divblock();
+				a2.style.display="none";
+				a1.style.borderRight="0";
+				a1.style.width="100%";
+			}
+			btn4.onclick=function(){
+				divblock();
+				a2.style.display="none";
+				a1.style.display="none";
+				setTimeout(function(){
+					divnone();
+					a2.style.display="block";
+					a1.style.display="block";
+				},1000);
+				
+			}
+			h1.onmousedown=function(e){
+				e=e||window.event;
+				var ev=getPosition(e);
+				var x=ev.x-cover.offsetLeft;
+				var y=ev.y-cover.offsetTop;
+				document.onmousemove=function(ea){
+					var maxt=(document.body.scrollTop+document.body.clientHeight-cover.offsetHeight);
+					var maxl=(document.body.scrollLeft+document.body.clientWidth-cover.offsetWidth);
+					var ee=getPosition(ea);
+					var l=(ee.x-x);
+					var t=(ee.y-y);
+					if(l<0){
+						l=0;
+					}
+					else if(l>maxl){
+						l=maxl;
+					}
+					if(t<0){
+						t=0;
+					}
+					else if(t>maxt){
+						t=maxt;
+					}
+					console.log(document.documentElement.clientHeight);
+					cover.style.left=l+"px";
+					cover.style.top=t+"px";
+				}
+				document.onmouseup=function(){
+					document.onmouseup=null;
+					document.onmousemove=null;
+				}
+				return false;
+			}
+			coverdiv.onclick=a1.onclick=a2.onclick=divnone;
+		}
+		function getPosition(e){
+			if(e.pageX){
+				return {"x":e.pageX,"y":e.pageY}
+			}
+			else{
+				return{
+					"x":e.clientX+document.body.scrollLeft-document.body.clientLeft,
+					"y":e.clientY+document.body.scrollTop-document.body.clientTop
+				}
+			}
+		}
+		function divblock(){
+			cover.style.display="block";
+			coverdiv.style.display="block";
+		}
+		function divnone(){
+				cover.style.display="none";
+				coverdiv.style.display="none";
+				a2.style.display="block";
+				a1.style.display="block";
+				a1.style.borderRight="1px solid #ccc";
+				a1.style.width="250px";
+				cover.style.left="30%";
+				cover.style.top="200px";
+		}
+
+
+	</script>
+</body>
+</html>
