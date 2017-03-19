@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>选项卡轮播</title>
+	<link rel="stylesheet" type="text/css" href="css/reset.css">
+	<style type="text/css">
+		#container{
+			width: 560px;
+			height: 315px;
+			border:1px solid #aaa;
+			position: relative;
+			top: 30px;
+			left: -300px;
+			margin-left: 50%;
+			padding: 20px;
+		}
+		#title{
+			width: 100%;
+			height: 35px;
+		}
+		h1{
+			height: 35px;
+			width:20%;
+			float: left;
+			text-align: center;
+			line-height: 35px;
+			background: #f1f1f1;
+			cursor: pointer;
+		}
+		#h1{
+			background: #c40000;
+		}
+		#ph,#img1{
+			width: 430px;
+			height:290px;
+			float: left;
+		}
+		#ul{
+			float: left;
+			width: 130px;
+		}
+		.li1{
+			cursor:pointer;
+			width: 100%;
+			height: 40px;
+			text-align: center;
+			line-height: 40px;
+			background: #f7f7f7;
+			border-bottom: 1px solid #aaa
+		}
+		#ul2{
+			display: none;
+		}
+		#fir{
+			background-color: #333;
+		}
+	</style>
+</head>
+<body>
+	<div id="container">
+		<div id="title">
+			<h1 id="h1">时尚女装</h1>
+			<h1 id="h2">精美潮装</h1>
+		</div>
+		<div id="main">
+			<div id="ph">
+				<img src="images/11.jpg" id="img1">
+			</div>
+			<div id="ul">
+				<ul id="ul1">
+					<li class="li1" id="fir">欧美羽绒</li>
+					<li class="li1">经典男装</li>
+					<li class="li1">全新女装</li>
+				</ul>
+				<ul id="ul2">
+					<li class="li1">超类男装</li>
+					<li class="li1">休闲男装</li>
+					<li class="li1">凡行动派</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+			var h1=document.getElementById("h1");
+			var h2=document.getElementById("h2");
+			var img1=document.getElementById("img1");
+			var ul1=document.getElementById("ul1");
+			var ul2=document.getElementById("ul2");
+			window.onload=function(){
+				move();
+			}
+			function modifyColor(name,indey){
+				for (var i = 0; i < name.children.length; i++) {
+					name.children[i].style.backgroundColor="#f7f7f7";
+				}
+				name.children[indey-1].style.backgroundColor="#333";
+			}
+			function modify1(h11,h22,ul11,ul22){
+				h11.style.backgroundColor="#f1f1f1";
+				h22.style.backgroundColor="#c40000";
+				ul11.style.display="none";
+				ul22.style.display="block";
+			}
+			function move(){
+				var index=1;
+				var indey=1;
+				setInterval(function(){
+					if(index==1&&indey<ul1.children.length){
+						indey++;
+						modifyColor(ul1,indey);
+					}
+					else if(index==1&&indey>=ul1.children.length){
+						index++;
+						indey=0;
+						modify1(h1,h2,ul1,ul2);
+					}
+					if(index==2&&indey<ul2.children.length){
+						indey++;
+						modifyColor(ul2,indey);
+					}
+					else if(index==2&&indey>=ul1.children.length){
+						index=1;
+						indey=1;
+						modify1(h2,h1,ul2,ul1);
+						modifyColor(ul1,indey);
+					}
+					img1.src="images/"+index+indey+".jpg";
+				},1000);
+			}
+	</script>
+</body>
+</html>
