@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>时钟imitate</title>
+	<style type="text/css">
+		body,html{
+			width: 100%;
+			height: 100%;
+		}
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		#canvas{
+			display: block;
+			
+			margin: 0 auto;
+			background: #f1f1f1;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="canvas" width="500px" height=" 500px"></canvas>
+</body>
+<script type="text/javascript">
+	var canvas=document.getElementById("canvas");
+	var ctx=canvas.getContext("2d");
+	var time,h,m,s;
+	clock();
+	window.onload=function(){
+		setInterval(clock,1000)
+	}
+	function clock(){
+		time=new Date();
+		h=time.getHours();
+		h=h%12+m/60;
+		m=time.getMinutes();
+		s=time.getSeconds();
+		ctx.clearRect(0, 0, 500, 500);
+		disk();
+		number();
+		minuteScale();
+		hourScale();
+		secondHand();
+		minuteHand();
+		hourHand();
+	}
+
+	//描绘圆盘
+	function disk(){
+		ctx.save();
+		// ctx.translate(250,250);
+		ctx.beginPath();
+		ctx.strokeStyle="#99ccff";
+		ctx.lineWidth=10;
+		ctx.arc(250, 250, 200, 0, 2*Math.PI, false);
+		ctx.closePath();
+		ctx.stroke();
+		ctx.restore();
+	}
+	//绘制数字1-12
+	function number(){
+		ctx.save();
+		var angle=0,nwidth=0,nx=0,ny=0;
+		ctx.translate(250,250);
+		ctx.font="20px Arial";
+		for (var i = 1; i <= 12; i++) {
+			angle=2*Math.PI*(i-3)/12;
+			nWidth=ctx.measureText(i).width;
+			nx=150*Math.cos(angle)-nWidth/2;
+			ny=150*Math.sin(angle)+nWidth/2;
+			ctx.fillText(i,nx,ny)
+		}
+		ctx.restore();
+	}
+	//绘制时刻度
+	function hourScale(){
+		
+		for (var i = 1; i <= 12; i++) {
+			ctx.save();
+			ctx.lineWidth=5;
+			ctx.strokeStyle="#333";
+			ctx.translate(250,250);
+			angle=2*Math.PI*i/12;
+			ctx.rotate(angle);
+			ctx.beginPath();
+			ctx.moveTo(0,-190);
+			ctx.lineTo(0,-170);
+			ctx.closePath();
+			ctx.stroke();
+			ctx.restore();  
+		}
+	}
+	//绘制分钟刻度
+	function minuteScale(){
+		for (var i = 1; i <= 60; i++) {
+			ctx.save();
+			ctx.lineWidth=5;
+			ctx.translate(250,250);
+			angle=2*Math.PI*i/60;
+			ctx.rotate(angle);
+			ctx.beginPath();
+			ctx.moveTo(0,-190);
+			ctx.lineTo(0,-180);
+			ctx.strokeStyle="#999";
+			ctx.closePath();
+			ctx.stroke();
+			ctx.restore();  
+		}
+	}
+	//绘制秒针
+	function secondHand(){
+		ctx.save();
+		ctx.lineWidth=3;
+		ctx.translate(250,250);
+		angle=2*Math.PI*s/60;
+		ctx.rotate(angle);
+		ctx.beginPath();
+		ctx.moveTo(0,-140);
+		ctx.lineTo(0,30);
+		ctx.strokeStyle="red";
+		ctx.closePath();
+		ctx.stroke();
+		ctx.restore();
+	}
+	//绘制分针
+	function minuteHand(){
+		ctx.save();
+		ctx.lineWidth=5;
+		ctx.translate(250,250);
+		angle=2*Math.PI*m/60;
+		ctx.rotate(angle);
+		ctx.beginPath();
+		ctx.moveTo(0,-110);
+		ctx.lineTo(0,30);
+		ctx.strokeStyle="green";
+		ctx.closePath();
+		ctx.stroke();
+		ctx.restore();
+	}
+	//绘制时针
+	function hourHand(){
+		ctx.save();
+		ctx.lineWidth=7;
+		ctx.translate(250,250);
+		angle=2*Math.PI*h/12;
+		ctx.rotate(angle);
+		ctx.beginPath();
+		ctx.moveTo(0,-80);
+		ctx.lineTo(0,30);
+		ctx.strokeStyle="black";
+		ctx.closePath();
+		ctx.stroke();
+		ctx.restore();
+	}
+</script>
+</html>

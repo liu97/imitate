@@ -69,6 +69,64 @@
 			mydate.setDate(mydate+30);
 			document.cookie="name:"+value+";expires="+mydate;
 		}
+
+
+
+
+
+		(function(){
+        var div = document.getElementById('div')
+        var btn = div.getElementsByTagName('button')
+        var style = document.getElementById('style')
+        var css = ['blue.css', 'yellow.css', 'green.css']
+
+        function init(){
+            var href = getCookie('css')
+            if(href.length){
+                setStyle(href)
+            }
+        }
+
+        init()
+
+        function changeStyle(){
+            for (var i = 0; i < btn.length; i++) {
+                btn[i].index = i
+                btn[i].onclick = function(){
+                    setStyle(css[this.index])
+                }
+            };
+        }
+
+        changeStyle()
+
+        function setStyle(href){
+            style.href = 'css/' + href
+            setCookie('css', href, 1)
+        }
+
+        function setCookie(key, value, day){
+            var d = new Date()
+            d.setDate(d.getDate() + day)
+            document.cookie = key + '=' + value + ';expires=' + d
+        }
+
+        function getCookie(key){
+            var list = document.cookie.split(';')
+            for (var i = 0; i < list.length; i++) {
+                var one = list[i].split('=')
+                if(one[0] == key){
+                    return one[1];
+                }
+            };
+            return ''
+        }
+
+        function delCookies(key){
+            setCookie(key, 1, -1)
+        }
+
+    }());
 	</script>
 </body>
 </html>

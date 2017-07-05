@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>模拟滚动条-豪情</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="/reset.css" media="all"/>
+    <style type="text/css">
+        *{margin:0;padding:0;}
+        body{ font:14px/1.125 Microsoft YaHei; background:#fff; }
+        ul,li{list-style:none;}
+        a{text-decoration:none;}
+        h2{margin:0;padding:0;}
+        .wrap{width:600px;margin:10px auto;border:1px solid #ccc;}
+        .inner{padding:15px;}
+        .clearfix{overflow:hidden;_zoom:1;}
+        .none{display:none;}
+        .jk-scrolldemo{width:700px;padding:1px;margin:20px auto;border:1px solid #ccc;background:#fff;}
+        .cont{height:800px;}
+        .el_main{width: 500px;margin:100px auto 0;height:550px;border:1px solid #ccc;background:#fff;border-radius:5px;}
+        #el_main_cont{padding:10px;line-height:2;overflow:hidden;}
+        #el_main_cont h2{margin:0 0;}
+        #el_main_cont h3{margin:30px 0 10px;}
+        .ele_text_res{color:#666;}
+        .form-group .btn{margin:0 5px;}
+        .unselect{-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none;}
+        /* plus */
+        .jkscroll-wrap{position:relative;padding:0;overflow:hidden;}
+        .jkscroll-cont{position:relative;padding-right:13px;top:0px;z-index:9999;}
+        .jkscroll-cont-hover{background:#FFFBE1;}
+        .jkscroll-bar{position:absolute;top:0px;right:0px;width:15px;height:100%;background:url(images/bar-gray.gif) repeat-y right 0 #edf7fa;z-index:10000;}
+        .jkscroll-bar-top,.jkscroll-bar-bot{position:absolute;height:15px;left:0px;width:100%;cursor:pointer;background:url(images/bar-gray.gif) no-repeat 0 0 #bbdef6;}
+        .jkscroll-bar-top{top:0px;display:none;}
+        .jkscroll-bar-bot{bottom:0px;background-position:0 -15px;display:none;}
+        .jkscroll-bar-mid{position:absolute;top:0px;width:15px;height:100px;border:1px solid #A3C3D5;background:url(images/bar-gray.gif) repeat-y -45px 0 #e0f1fc;}
+        .jkscroll-wrap .hover{background:url(images/bar-gray.gif) repeat-y -58px 0 #dceffc;}
+        /* simple */
+        .jkscroll-wrap .jkscroll-simple{width:12px;background:#f2f2f2;border-left:1px solid #dadada;}
+        .jkscroll-wrap .jkscroll-simple .jkscroll-bar-top,.jkscroll-wrap .jkscroll-simple .jkscroll-bar-bot{display:none;}
+        .jkscroll-wrap .jkscroll-simple .jkscroll-bar-mid{top:0;right:-2px;background:#c0c0c0;border:none 0;}
+        .jkscroll-wrap .jkscroll-simple .hover{background:#909090;}
+        /* blue */
+        .jkscroll-wrap .jkscroll-gray{background:url(images/bar-blue.gif) repeat-y right 0 #edf7fa;}
+        .jkscroll-wrap .jkscroll-gray .jkscroll-bar-top,.jkscroll-wrap .jkscroll-gray .jkscroll-bar-bot{background:url(images/bar-blue.gif);}
+        .jkscroll-wrap .jkscroll-gray .jkscroll-bar-mid{background:url(images/bar-blue.gif) repeat-y -45px 0;border:1px solid #BCBCBC;}
+    </style>
+</head>
+<body>
+<div class="demo1 none">
+    <form class="form-horizontal user-input" id="form" role="form">        
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button id="btn2" type="button" class="btn btn-success">加强效果</button>
+                <button id="btn1" type="button" class="btn btn-primary">1</button>
+                <button id="btn3" type="button" class="btn btn-info">2</button>
+            </div>
+        </div>
+    </form>
+</div>    
+
+<script>
+    
+</script>
+</body>
+</html>
