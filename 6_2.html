@@ -24,29 +24,31 @@
 	<canvas id="canvas" width="500px" height=" 500px"></canvas>
 </body>
 <script type="text/javascript">
+window.onload=function(){
 	var canvas=document.getElementById("canvas");
 	var ctx=canvas.getContext("2d");
 	var time,h,m,s;
-	clock();
-	window.onload=function(){
-		setInterval(clock,1000)
-	}
+	
 	function clock(){
+		ctx.clearRect(0, 0, 500, 500);
+		now();
+		disk();
+		number();
+		minuteScale();
+		hourScale();
+		hourHand();
+		secondHand();
+		minuteHand();
+		circular();
+	}
+	//现在时间
+	function now(){
 		time=new Date();
 		h=time.getHours();
 		h=h%12+m/60;
 		m=time.getMinutes();
 		s=time.getSeconds();
-		ctx.clearRect(0, 0, 500, 500);
-		disk();
-		number();
-		minuteScale();
-		hourScale();
-		secondHand();
-		minuteHand();
-		hourHand();
 	}
-
 	//描绘圆盘
 	function disk(){
 		ctx.save();
@@ -153,6 +155,21 @@
 		ctx.closePath();
 		ctx.stroke();
 		ctx.restore();
+	}
+	//绘制圆点
+	function circular(){
+		ctx.save();
+		ctx.fillStyle="#333";
+		ctx.translate(250,250);
+		ctx.beginPath();
+		ctx.arc(0,0,8,0,2*Math.PI,false)
+		ctx.fill();
+		ctx.closePath();
+		ctx.restore();
+	}
+	clock();
+	
+		setInterval(clock,1000)
 	}
 </script>
 </html>
