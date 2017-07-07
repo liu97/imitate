@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>贪吃蛇</title>
+	<style>
+		@font-face{
+			font-family: myFont;
+			src:url(font/font709/AaStrawberrySister.ttf);
+		}
+	</style>
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+</head>
+<body>
+	
+	<div id="container">
+		<div id="score">
+			<div id="highScore"></div>
+			<div id="nowScore"></div>
+		</div>
+		<canvas width="500px" height="360px" id="canvas"></canvas>
+	</div>
+	
+	<div id="mask"></div>
+	<div id="operation">
+  		<p>操作指示：</p>
+  		<p>只需操作键盘上下左右键控制蛇头的方向</p>
+		<p>↑上、&nbsp;↓下、&nbsp;←左、&nbsp;→右</p>
+  	</div>
+	<button id="play">play</button>
+	<div id="select">
+		<p id="select_p">请选择蛇前进的速度：</p>
+		<button class="select_button">慢</button>
+		<button class="select_button">一般</button>
+		<button class="select_button">快</button>
+	</div>
+</body>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+</html>
