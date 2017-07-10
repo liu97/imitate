@@ -27,16 +27,38 @@
 	var nscore=0;
 
 	window.onload=function(){
-		for (var i = 0; i < width/boxwh; i++) {
-			for(var j=0; j < height/boxwh; j++){
-				use.unshift({'x':i,'y':j})
+		if(isPC()){
+			for (var i = 0; i < width/boxwh; i++) {
+				for(var j=0; j < height/boxwh; j++){
+					use.unshift({'x':i,'y':j})
+				}
 			}
+			writeHeight();
+			writeWidth();
+			nowScore.innerHTML="Now&nbsp;Score:<span>"+nscore+"</span>";
+			play.onclick=select;
 		}
-		writeHeight();
-		writeWidth();
-		nowScore.innerHTML="Now&nbsp;Score:<span>"+nscore+"</span>";
-		play.onclick=select;
+		else{
+			mask.innerHTML="对不起，本游戏版本只支持电脑使用";
+		}
+
+		
 				// move();
+	}
+	//检测是否不是手机访问
+	function isPC() {
+	    var userAgentInfo = navigator.userAgent;
+	    var Agents = ["Android", "iPhone",
+	                "SymbianOS", "Windows Phone",
+	                "iPad", "iPod"];
+	    var flag = true;
+	    for (var v = 0; v < Agents.length; v++) {
+	        if (userAgentInfo.indexOf(Agents[v]) > 0) {
+	            flag = false;
+	            break;
+	        }
+	    }
+	    return flag;
 	}
 	//画竖线
 	function writeHeight(){
