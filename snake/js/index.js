@@ -40,6 +40,9 @@
 			play.onclick=select;
 		}
 		else{
+			operation.style.display="none";
+			play.style.display="none";
+			mask.style.fontSize="40px";
 			mask.innerHTML="对不起，本游戏版本只支持电脑使用";
 		}
 
