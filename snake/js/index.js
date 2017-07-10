@@ -24,7 +24,8 @@
 	var snakeColor="white";//蛇颜色
 	var boxwh=20;//格子大小
 	var jishu=0;//判断play按键是否已经点击
-	var nscore=0;
+	var nscore=0;//现在的分数
+	var timer=0;//计时器
 
 	window.onload=function(){
 		if(isPC()){
@@ -163,11 +164,13 @@
 		writeSnake();
 		for (var i = 1; i < snake.length; i++) {
 			if(snakex==snake[i].x&&snakey==snake[i].y){
+				window.clearInterval(timer);
 				alert("撞到自己，游戏结束！！！");
 				window.location.reload();
 			}
 		}
-		if(snakex==-1||snakey==-1||snakex==width/boxwh||snakey==height/boxwh){
+		if(snakex<=-1||snakey<=-1||snakex>=width/boxwh||snakey>=height/boxwh){
+			window.clearInterval(timer);
 			alert("撞到墙，游戏结束！！！");
 			window.location.reload();
 		}
@@ -272,7 +275,7 @@
 								readLocal();//获取最高分数
 								
 								move();
-								window.setInterval(move,speed);
+								timer=window.setInterval(move,speed);
 								document.onkeydown=function(e){
 										var event=e|window.event;
 										var keydown=e.keyCode;
