@@ -167,7 +167,7 @@
 				window.location.reload();
 			}
 		}
-		if(snakex=-1||snakey=-1||snakex=width/boxwh||snakey=height/boxwh){
+		if(snakex==-1||snakey==-1||snakex==width/boxwh||snakey==height/boxwh){
 			alert("撞到墙，游戏结束！！！");
 			window.location.reload();
 		}
