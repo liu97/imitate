@@ -32,23 +32,23 @@ window.onload=function(){
 	
 	function clock(){
 		ctx.clearRect(0, 0, 500, 500);
-		now();
 		disk();
 		number();
 		minuteScale();
 		hourScale();
+		circular();
+		now();
 		hourHand();
 		secondHand();
 		minuteHand();
-		circular();
 	}
 	//现在时间
 	function now(){
 		time=new Date();
 		h=time.getHours();
-		h=h%12+m/60;
 		m=time.getMinutes();
 		s=time.getSeconds();
+		h=h%12+m/60;
 	}
 	//描绘圆盘
 	function disk(){
@@ -144,6 +144,7 @@ window.onload=function(){
 	}
 	//绘制时针
 	function hourHand(){
+		debugger
 		ctx.save();
 		ctx.lineWidth=7;
 		ctx.translate(250,250);
@@ -169,8 +170,7 @@ window.onload=function(){
 		ctx.restore();
 	}
 	clock();
-	
-		setInterval(clock,1000)
-	}
+	setInterval(clock,1000)
+}
 </script>
 </html>
