@@ -1,3 +1,3 @@
 # javascript-antic
 
-## js中的一些小技巧
+> js中的一些小技巧
